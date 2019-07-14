@@ -1,0 +1,47 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+
+type Query {
+  Lots(limit: Int, nextToken: String): LotConnection
+  Lot(id: ID!): Lot
+  Container(containerId: String!): Container
+}
+
+
+type Mutation {
+  addLot(id: ID!, lotNumber:String!): Lot
+  addContainer(lotId: ID!, containerId: String!, size: ContainerSize!): Container
+  #createContainer(lotId: ID!, containerId:String!, size: ContainerSize): Container
+}
+
+
+type Lot {
+  id: ID!
+  lotNumber: String!
+}
+
+
+type Container {
+  lotId: ID!
+  containerId: String!
+  size: ContainerSize!
+}
+
+type LotConnection {
+  lots: [Lot]
+  nextToken: String
+}
+
+enum ContainerSize{
+  box
+  highCube
+}
+
+
+
+
+
+
